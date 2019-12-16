@@ -1257,35 +1257,6 @@ module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
 
 /***/ }),
 
-/***/ "b0c0":
-/***/ (function(module, exports, __webpack_require__) {
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var defineProperty = __webpack_require__("9bf2").f;
-
-var FunctionPrototype = Function.prototype;
-var FunctionPrototypeToString = FunctionPrototype.toString;
-var nameRE = /^\s*function ([^ (]*)/;
-var NAME = 'name';
-
-// Function instances `.name` property
-// https://tc39.github.io/ecma262/#sec-function-instances-name
-if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
-  defineProperty(FunctionPrototype, NAME, {
-    configurable: true,
-    get: function () {
-      try {
-        return FunctionPrototypeToString.call(this).match(nameRE)[1];
-      } catch (error) {
-        return '';
-      }
-    }
-  });
-}
-
-
-/***/ }),
-
 /***/ "b39a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2466,9 +2437,6 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
-
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/message/message.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var messagevue_type_script_lang_js_ = ({
@@ -2778,35 +2746,32 @@ var confirm_component = normalizeComponent(
 });
 // CONCATENATED MODULE: ./src/index.js
 
+ // const components = [message, confirm]
+// 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
+// const install = function(Vue) {
+//   // 判断是否安装
+//   if (install.installed) return
+//   // 遍历注册全局组件
+//   components.map(component => Vue.component(component.name, component))
+//   Vue.use(message)
+// }
+// 判断是否是直接引入文件
+// if (typeof window !== 'undefined' && window.Vue) {
+//   install(window.Vue)
+// }
+// export default {
+//   install,
+//   message,
+//   confirm
+// }
 
 
-
-var components = [components_message, components_confirm]; // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
-
-var src_install = function install(Vue) {
-  // 判断是否安装
-  if (install.installed) return; // 遍历注册全局组件
-
-  components.map(function (component) {
-    return Vue.component(component.name, component);
-  });
-  Vue.use(components_message);
-}; // 判断是否是直接引入文件
-
-
-if (typeof window !== 'undefined' && window.Vue) {
-  src_install(window.Vue);
-}
-
-/* harmony default export */ var src = ({
-  install: src_install,
-  message: components_message,
-  confirm: components_confirm
-});
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
+/* concated harmony reexport message */__webpack_require__.d(__webpack_exports__, "message", function() { return components_message; });
+/* concated harmony reexport confirm */__webpack_require__.d(__webpack_exports__, "confirm", function() { return components_confirm; });
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (/* Cannot get final name for export "default" in "./src/index.js" (known exports: , known reexports: message confirm) */ undefined);
 
 
 
@@ -2851,4 +2816,3 @@ module.exports = global.Promise;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=better-ui.common.js.map

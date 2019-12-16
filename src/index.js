@@ -9,7 +9,9 @@ const install = function(Vue) {
   if (install.installed) return
   // 遍历注册全局组件
   components.map(component => Vue.component(component.name, component))
-  Vue.use(message)
+  Vue.prototype.$message = message
+  Vue.prototype.$confirm = confirm
+  // Vue.use(message)
 }
 
 // 判断是否是直接引入文件
