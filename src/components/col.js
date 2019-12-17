@@ -1,5 +1,5 @@
 export default {
-  name: 'TableCol',
+  name: 'Col',
   props: {
     prop: {
       type: String
