@@ -60,32 +60,9 @@ table {
   tbody > tr:hover {
     background: #d0f5ea;
   }
-  .link {
-    color: #158ae7;
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
   td {
     :not(:first-child) {
       margin-left: 10px;
-    }
-    button {
-      border: 1px solid #158ae7;
-      color: #158ae7;
-      &:hover {
-        background-color: #158ae7;
-        color: #fff;
-      }
-    }
-    button.remove {
-      border: 1px solid #ff4949;
-      color: #ff4949;
-      &:hover {
-        background-color: #ff4949;
-        color: #fff;
-      }
     }
   }
 }
