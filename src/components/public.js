@@ -3,7 +3,6 @@ export function addMask() {
   if (mask) {
     let count = parseInt(mask.getAttribute('count'))
     mask.setAttribute('count', count + 1)
-    // mask.style['z-index'] = 1999 + count * 2
   } else {
     let dom = document.createElement('div')
     dom.className = 'mask'

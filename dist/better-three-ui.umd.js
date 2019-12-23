@@ -166,6 +166,13 @@ module.exports = !DESCRIPTORS && !fails(function () {
 
 /***/ }),
 
+/***/ "0dfd":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "1276":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3749,7 +3756,7 @@ function addMask() {
 
   if (mask) {
     var count = parseInt(mask.getAttribute('count'));
-    mask.setAttribute('count', count + 1); // mask.style['z-index'] = 1999 + count * 2
+    mask.setAttribute('count', count + 1);
   } else {
     var dom = document.createElement('div');
     dom.className = 'mask';
@@ -4638,6 +4645,9 @@ var tree_component = normalizeComponent(
 )
 
 /* harmony default export */ var tree = (tree_component.exports);
+// EXTERNAL MODULE: ./src/style/base.scss
+var base = __webpack_require__("0dfd");
+
 // CONCATENATED MODULE: ./src/index.js
 
 
@@ -4648,6 +4658,17 @@ var tree_component = normalizeComponent(
 
 
 
+
+ // const install = function(Vue, opts = {}) {
+//   components.map(component => {
+//     Vue.component(component.name, component);
+//   })
+// }
+
+/* 支持使用标签的方式引入 */
+// if (typeof window !== 'undefined' && window.Vue) {
+// install(window.Vue);
+// }
 
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
