@@ -131,7 +131,8 @@ export default {
                 // 原生dom绑定事件
                 else if (
                   array[i].tag === 'input' ||
-                  array[i].tag === 'select'
+                  array[i].tag === 'select' ||
+                  array[i].tag === 'textarea'
                 ) {
                   array[i].data.on['blur'] = (
                     e,
@@ -218,6 +219,7 @@ form {
       flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center;
+      min-height: 31px;
       label {
         margin-right: 10px;
         margin-top: 5px;

@@ -8,6 +8,7 @@ export default {
   },
   render() {
     if (!this.tableData || !this.$slots.default) return
+    let resData = this.$slots.default.filter(item => item.tag)
     return (
       <table
         border="1"
@@ -18,7 +19,7 @@ export default {
       >
         <thead>
           <tr>
-            {this.$slots.default.map(item => (
+            {resData.map(item => (
               <th>{item.componentOptions.propsData.label}</th>
             ))}
           </tr>
@@ -27,7 +28,7 @@ export default {
           {this.tableData.map(item => {
             return (
               <tr>
-                {this.$slots.default.map(item2 => {
+                {resData.map(item2 => {
                   return item2.data.scopedSlots ? (
                     <td>{item2.data.scopedSlots.button({ row: item })}</td>
                   ) : (
