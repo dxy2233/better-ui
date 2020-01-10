@@ -118,11 +118,13 @@ export default {
     display: flex;
     ul {
       height: 250px;
+      min-width: 60px;
       overflow: auto;
       border-left: 1px solid #ccc;
       padding: 5px;
       li {
         line-height: 30px;
+        white-space: nowrap;
         cursor: pointer;
         span {
           color: #ccc;
@@ -132,15 +134,15 @@ export default {
         }
       }
     }
-    ul:first-child {
-      width: 80px;
-    }
-    ul:nth-child(2) {
-      width: 160px;
-    }
-    ul:nth-child(3) {
-      width: 150px;
-    }
+    // ul:first-child {
+    //   width: 80px;
+    // }
+    // ul:nth-child(2) {
+    //   width: 160px;
+    // }
+    // ul:nth-child(3) {
+    //   width: 150px;
+    // }
   }
 }
 </style>
