@@ -37,6 +37,23 @@ export default {
         loop(this.data, this.value)
         this.selectedData = res
       }
+    },
+    data: {
+      handler() {
+        let res = {}
+        function loop(array, id) {
+          for (let index = 0; index < array.length; index++) {
+            if (array[index].id === id) {
+              res = array[index]
+              break
+            } else {
+              if (array[index].nextNodes) loop(array[index].nextNodes, id)
+            }
+          }
+        }
+        loop(this.data, this.value)
+        this.selectedData = res
+      }
     }
   },
   methods: {
@@ -134,15 +151,6 @@ export default {
         }
       }
     }
-    // ul:first-child {
-    //   width: 80px;
-    // }
-    // ul:nth-child(2) {
-    //   width: 160px;
-    // }
-    // ul:nth-child(3) {
-    //   width: 150px;
-    // }
   }
 }
 </style>

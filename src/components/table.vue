@@ -4,6 +4,10 @@ export default {
   props: {
     tableData: {
       type: Array
+    },
+    rowClass: {
+      type: Function,
+      default: function() {}
     }
   },
   render() {
@@ -25,9 +29,9 @@ export default {
           </tr>
         </thead>
         <tbody>
-          {this.tableData.map(item => {
+          {this.tableData.map((item, index) => {
             return (
-              <tr>
+              <tr class={this.rowClass(item, index)}>
                 {resData.map(item2 => {
                   return item2.data.scopedSlots ? (
                     <td>{item2.data.scopedSlots.button({ row: item })}</td>
