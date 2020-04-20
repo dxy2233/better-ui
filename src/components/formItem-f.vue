@@ -1,13 +1,15 @@
 <script>
+import { isEmpty } from '@/utils/tool.js'
+
 export default {
   name: 'FormItem',
   props: {
     label: {
-      type: String
+      type: String,
     },
     prop: {
-      type: String
-    }
+      type: String,
+    },
   },
   inject: ['form', 'rules'],
   methods: {
@@ -15,7 +17,7 @@ export default {
       this[key + 'Message'] = null
       for (let i = 0; i < array.length; i++) {
         //   required
-        if (array[i].required && this.form[this.prop].length < 1) {
+        if (array[i].required && isEmpty(this.form[this.prop])) {
           this[key + 'Message'] = array[i].message
           break
         }
@@ -33,26 +35,29 @@ export default {
           break
         }
       }
-    }
+    },
   },
   data() {
     return {
       blurMessage: null,
-      changeMessage: null
+      changeMessage: null,
     }
   },
   computed: {
     errMessage() {
       if (!this.blurMessage && !this.changeMessage) return null
       else return this.blurMessage || this.changeMessage
-    }
+    },
   },
   mounted() {
     if (this.prop) {
       const rules = {
-        blur: this.rules[this.prop].filter(item => item.trigger === 'blur'),
-        change: this.rules[this.prop].filter(item => item.trigger === 'change')
+        blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
+        change: this.rules[this.prop].filter(
+          (item) => item.trigger === 'change'
+        ),
       }
+      // 委托blur和change事件
       for (const key in rules) {
         if (rules[key].length > 0) {
           this.$refs[this.prop].addEventListener(
@@ -60,7 +65,7 @@ export default {
             () => {
               this.test(rules[key], key)
             },
-            true
+            key === 'blur' ? true : false
           )
         }
       }
@@ -81,7 +86,7 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>
 

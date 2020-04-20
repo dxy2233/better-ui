@@ -28,29 +28,29 @@ export default {
     return {
       form: {
         type: null,
-        blurTest: ''
+        blurTest: '',
       },
       rules: {
         type: [
-          { required: true, message: '请输入项目编号', trigger: 'change' }
+          { required: true, message: '请输入项目编号', trigger: 'change' },
         ],
         blurTest: [
           { required: true, message: '请输入文本', trigger: 'blur' },
           {
             validator: projectCode,
             message: '请输入由字母、数字、- 、 _ 或 . 组成的6-32位项目编号',
-            trigger: 'change'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   created() {},
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())
-    }
-  }
+    },
+  },
 }
 </script>
 
