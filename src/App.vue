@@ -8,30 +8,49 @@
           <option :value="3">漏洞扫描报告</option>
         </select>
       </baseFormItem>
-      <button type="button" @click="submit">
-        <svg-icon icon-class="save" />保存
-      </button>
+      <baseFormItem label="blur测试" prop="blurTest" required>
+        <input type="text" v-model="form.blurTest" />
+      </baseFormItem>
+      <button type="button" @click="submit">保存</button>
     </baseForm>
   </div>
 </template>
 
 <script>
 import baseForm from './components/form-f'
-import baseFormItem from './components/formItem'
+import baseFormItem from './components/formItem-f'
 
 export default {
   name: 'app',
   components: { baseForm, baseFormItem },
   data() {
+    const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
     return {
       form: {
-        type: null
+        type: null,
+        blurTest: ''
       },
-      rules: {}
+      rules: {
+        type: [
+          { required: true, message: '请输入项目编号', trigger: 'change' }
+        ],
+        blurTest: [
+          { required: true, message: '请输入文本', trigger: 'blur' },
+          {
+            validator: projectCode,
+            message: '请输入由字母、数字、- 、 _ 或 . 组成的6-32位项目编号',
+            trigger: 'change'
+          }
+        ]
+      }
     }
   },
   created() {},
-  methods: {}
+  methods: {
+    submit() {
+      console.log(this.$refs.testForm.validate())
+    }
+  }
 }
 </script>
 
