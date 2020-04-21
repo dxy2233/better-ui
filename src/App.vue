@@ -11,6 +11,22 @@
       <baseFormItem label="blur测试" prop="blurTest" required>
         <input type="text" v-model="form.blurTest" />
       </baseFormItem>
+      <div>
+        <div>
+          <div>
+            <baseFormItem label="radio测试" prop="radioTest" required>
+              <label>
+                <input type="radio" v-model="form.radioTest" value="1" />
+                1
+              </label>
+              <label>
+                <input type="radio" v-model="form.radioTest" value="2" />
+                2
+              </label>
+            </baseFormItem>
+          </div>
+        </div>
+      </div>
       <button type="button" @click="submit">保存</button>
     </baseForm>
   </div>
@@ -29,28 +45,30 @@ export default {
       form: {
         type: null,
         blurTest: '',
+        radioTest: ''
       },
       rules: {
         type: [
-          { required: true, message: '请输入项目编号', trigger: 'change' },
+          { required: true, message: '请输入项目编号', trigger: 'change' }
         ],
         blurTest: [
           { required: true, message: '请输入文本', trigger: 'blur' },
           {
             validator: projectCode,
             message: '请输入由字母、数字、- 、 _ 或 . 组成的6-32位项目编号',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
-      },
+        radioTest: [{ required: true, message: 'radio', trigger: 'change' }]
+      }
     }
   },
   created() {},
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -3,27 +3,29 @@ export default {
   name: 'Form',
   props: {
     form: {
-      type: Object,
+      type: Object
     },
     rules: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   provide() {
     return {
       form: this.form,
-      rules: this.rules,
+      rules: this.rules
     }
   },
   methods: {
     // 验证表单所有项目
     validate() {
-      console.log(this.rules)
-    },
+      this.$children.forEach(item => {
+        if (item.prop) item.mergeVerify()
+      })
+    }
   },
   render() {
     return <form>{this.$slots.default}</form>
-  },
+  }
 }
 </script>
 

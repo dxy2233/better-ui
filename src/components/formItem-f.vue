@@ -1,61 +1,40 @@
 <script>
-import { isEmpty } from '@/utils/tool.js'
+import { verify } from '@/utils/tool.js'
 
 export default {
   name: 'FormItem',
   props: {
     label: {
-      type: String,
+      type: String
     },
     prop: {
-      type: String,
-    },
+      type: String
+    }
   },
   inject: ['form', 'rules'],
-  methods: {
-    test(array, key) {
-      this[key + 'Message'] = null
-      for (let i = 0; i < array.length; i++) {
-        //   required
-        if (array[i].required && isEmpty(this.form[this.prop])) {
-          this[key + 'Message'] = array[i].message
-          break
-        }
-        // 正则
-        else if (
-          array[i].validator &&
-          !array[i].validator.test(this.form[this.prop])
-        ) {
-          this[key + 'Message'] = array[i].message
-          break
-        }
-        // 自定义方法
-        else if (array[i].other && array[i].other(this.form)) {
-          this[key + 'Message'] = array[i].message
-          break
-        }
-      }
-    },
-  },
   data() {
     return {
       blurMessage: null,
-      changeMessage: null,
+      changeMessage: null
     }
   },
   computed: {
     errMessage() {
       if (!this.blurMessage && !this.changeMessage) return null
       else return this.blurMessage || this.changeMessage
-    },
+    }
+  },
+  methods: {
+    mergeVerify() {
+      const res = verify(this.rules[this.prop], this.form, this.prop)
+      if (res) this[res[1] + 'Message'] = res[0]
+    }
   },
   mounted() {
     if (this.prop) {
       const rules = {
-        blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
-        change: this.rules[this.prop].filter(
-          (item) => item.trigger === 'change'
-        ),
+        blur: this.rules[this.prop].filter(item => item.trigger === 'blur'),
+        change: this.rules[this.prop].filter(item => item.trigger === 'change')
       }
       // 委托blur和change事件
       for (const key in rules) {
@@ -63,7 +42,11 @@ export default {
           this.$refs[this.prop].addEventListener(
             key,
             () => {
-              this.test(rules[key], key)
+              this[key + 'Message'] = verify(
+                rules[key],
+                this.form,
+                this.prop
+              )[0]
             },
             key === 'blur' ? true : false
           )
@@ -77,7 +60,7 @@ export default {
         <div class="form-item">
           <label>
             {this.$attrs.hasOwnProperty('required') ? <em>*</em> : null}
-            {this.label}:
+            {this.label}
           </label>
           <span ref={this.prop}>{this.$slots.default}</span>
         </div>
@@ -86,7 +69,7 @@ export default {
         </div>
       </div>
     )
-  },
+  }
 }
 </script>
 
