@@ -45,30 +45,30 @@ export default {
       form: {
         type: null,
         blurTest: '',
-        radioTest: ''
+        radioTest: '',
       },
       rules: {
         type: [
-          { required: true, message: '请输入项目编号', trigger: 'change' }
+          { required: true, message: '请输入项目编号', trigger: 'change' },
         ],
         blurTest: [
           { required: true, message: '请输入文本', trigger: 'blur' },
           {
             validator: projectCode,
             message: '请输入由字母、数字、- 、 _ 或 . 组成的6-32位项目编号',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
-        radioTest: [{ required: true, message: 'radio', trigger: 'change' }]
-      }
+        radioTest: [{ required: true, message: 'radio', trigger: 'change' }],
+      },
     }
   },
   created() {},
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -3,16 +3,16 @@ export default {
   name: 'Table',
   props: {
     tableData: {
-      type: Array
+      type: Array,
     },
     rowClass: {
       type: Function,
-      default: function() {}
-    }
+      default: function () {},
+    },
   },
   render() {
     if (!this.tableData || !this.$slots.default) return
-    let resData = this.$slots.default.filter(item => item.tag)
+    let resData = this.$slots.default.filter((item) => item.tag)
     return (
       <table
         border="1"
@@ -23,7 +23,7 @@ export default {
       >
         <thead>
           <tr>
-            {resData.map(item => (
+            {resData.map((item) => (
               <th>{item.componentOptions.propsData.label}</th>
             ))}
           </tr>
@@ -32,7 +32,7 @@ export default {
           {this.tableData.map((item, index) => {
             return (
               <tr class={this.rowClass(item, index)}>
-                {resData.map(item2 => {
+                {resData.map((item2) => {
                   return item2.data.scopedSlots ? (
                     <td>{item2.data.scopedSlots.button({ row: item })}</td>
                   ) : (
@@ -45,7 +45,7 @@ export default {
         </tbody>
       </table>
     )
-  }
+  },
 }
 </script>
 

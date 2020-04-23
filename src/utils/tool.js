@@ -37,5 +37,6 @@ export function verify(array, form, key) {
       return [array[i].message, array[i].trigger]
     }
   }
+  // 验证通过后返回null直接赋值给错误文字的字段
   return [null, null]
 }

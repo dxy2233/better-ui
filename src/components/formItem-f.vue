@@ -5,36 +5,42 @@ export default {
   name: 'FormItem',
   props: {
     label: {
-      type: String
+      type: String,
     },
     prop: {
-      type: String
-    }
+      type: String,
+    },
   },
   inject: ['form', 'rules'],
   data() {
     return {
       blurMessage: null,
-      changeMessage: null
+      changeMessage: null,
     }
   },
   computed: {
     errMessage() {
       if (!this.blurMessage && !this.changeMessage) return null
       else return this.blurMessage || this.changeMessage
-    }
+    },
   },
   methods: {
     mergeVerify() {
       const res = verify(this.rules[this.prop], this.form, this.prop)
-      if (res) this[res[1] + 'Message'] = res[0]
-    }
+      if (res[0]) {
+        // 返回false并给错误信息赋值
+        this[res[1] + 'Message'] = res[0]
+        return false
+      } else return true
+    },
   },
   mounted() {
     if (this.prop) {
       const rules = {
-        blur: this.rules[this.prop].filter(item => item.trigger === 'blur'),
-        change: this.rules[this.prop].filter(item => item.trigger === 'change')
+        blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
+        change: this.rules[this.prop].filter(
+          (item) => item.trigger === 'change'
+        ),
       }
       // 委托blur和change事件
       for (const key in rules) {
@@ -69,7 +75,7 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>
 

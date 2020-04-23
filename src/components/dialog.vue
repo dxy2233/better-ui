@@ -19,16 +19,16 @@ export default {
   name: 'Dialog',
   props: {
     visible: {
-      type: Boolean
+      type: Boolean,
     },
     top: {
       type: String,
-      default: '15vh'
+      default: '15vh',
     },
     width: {
       type: String,
-      default: '50%'
-    }
+      default: '50%',
+    },
   },
   watch: {
     visible(val) {
@@ -37,11 +37,11 @@ export default {
         cutMask()
         this.closed()
       }
-    }
+    },
   },
   data() {
     return {
-      zIndex: 2001
+      zIndex: 2001,
     }
   },
   methods: {
@@ -51,8 +51,8 @@ export default {
     // 关闭后的回调
     closed() {
       this.$emit('closed')
-    }
-  }
+    },
+  },
 }
 </script>
 
