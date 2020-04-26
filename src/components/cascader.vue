@@ -3,20 +3,20 @@ export default {
   name: 'Cascader',
   props: {
     value: {
-      type: [String, Number]
+      type: [String, Number],
     },
     data: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   model: {
-    event: 'update'
+    event: 'update',
   },
   data() {
     return {
       boxShow: false,
       cascaderData: [], // 需要渲染的数组
-      selectedData: {} // 当前值
+      selectedData: {}, // 当前值
     }
   },
   watch: {
@@ -36,7 +36,7 @@ export default {
         }
         loop(this.data, this.value)
         this.selectedData = res
-      }
+      },
     },
     data: {
       handler() {
@@ -53,8 +53,8 @@ export default {
         }
         loop(this.data, this.value)
         this.selectedData = res
-      }
-    }
+      },
+    },
   },
   methods: {
     start() {
@@ -71,12 +71,15 @@ export default {
       this.selectedData = info
       this.$emit('update', info.id)
       this.$emit('change', info) // change回调
+      this.$refs.betterCascader.dispatchEvent(
+        new Event('change', { bubbles: true })
+      )
       this.boxShow = false
-    }
+    },
   },
   render() {
     let _this = this
-    document.onmouseup = function(e) {
+    document.onmouseup = function (e) {
       var e2 = e || window.event
       var target = e2.target || e2.srcElement
       var _tar = document.body.querySelector('.cascader')
@@ -87,7 +90,12 @@ export default {
     }
     return (
       <div class="cascader">
-        <select value="1" onclick={this.start} disabled={this.$attrs.disabled}>
+        <select
+          ref="betterCascader"
+          value="1"
+          onclick={this.start}
+          disabled={this.$attrs.disabled}
+        >
           <option value="1" style="display:none;">
             {this.selectedData.orgName}
           </option>
@@ -96,7 +104,7 @@ export default {
           {this.cascaderData.map((item, index) => {
             return (
               <ul>
-                {item.map(item2 => {
+                {item.map((item2) => {
                   return (
                     <li
                       onmouseenter={() => {
@@ -117,7 +125,7 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>
 

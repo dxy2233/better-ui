@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     mergeVerify() {
+      this.clearMessage()
       const res = verify(this.rules[this.prop], this.form, this.prop)
       if (res[0]) {
         // 返回false并给错误信息赋值
