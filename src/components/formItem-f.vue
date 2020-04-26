@@ -33,6 +33,10 @@ export default {
         return false
       } else return true
     },
+    clearMessage() {
+      this.blurMessage = null
+      this.changeMessage = null
+    },
   },
   mounted() {
     if (this.prop) {

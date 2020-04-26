@@ -29,6 +29,7 @@
       </div>
       <button type="button" @click="submit">保存</button>
     </baseForm>
+    <button @click="clearErr">clearErr</button>
   </div>
 </template>
 
@@ -67,6 +68,9 @@ export default {
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())
+    },
+    clearErr() {
+      this.$refs.testForm.clearErr()
     },
   },
 }

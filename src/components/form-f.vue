@@ -24,6 +24,11 @@ export default {
       })
       return res
     },
+    clearErr() {
+      this.$children.forEach((item) => {
+        item.clearMessage()
+      })
+    },
   },
   render() {
     return <form>{this.$slots.default}</form>

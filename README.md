@@ -1,24 +1,26 @@
-# better-ui
+# better-three-ui
+三同步项目极简UI组件库
 
-## Project setup
-```
-npm install
-```
+input、select、button等不做封装，尽量使用原生元素，修改默认样式。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+----
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Form
 
-### Lints and fixes files
-```
-npm run lint
-```
+## dialog
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## table
+
+## pagination
+
+## tree
+
+## date
+
+## cascader
+
+## loading
+
+## confirm
+
+## message

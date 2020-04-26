@@ -4,8 +4,10 @@ import baseTable from './components/table'
 import baseCol from './components/col'
 import basePagination from './components/pagination'
 import baseDialog from './components/dialog'
-import baseForm from './components/form'
-import baseFormItem from './components/formItem'
+import baseForm from './components/form-f'
+import baseFormItem from './components/formItem-f'
+// import baseForm from './components/form'
+// import baseFormItem from './components/formItem'
 import baseCascader from './components/cascader'
 import baseTree from './components/tree'
 import './style/base.scss'
@@ -31,5 +33,5 @@ export {
   baseForm,
   baseFormItem,
   baseCascader,
-  baseTree
+  baseTree,
 }
