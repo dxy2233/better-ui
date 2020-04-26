@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <baseForm ref="testForm" :form="form" :rules="rules">
-      <baseFormItem label="报告类型" prop="type" required>
+      <baseFormItem label="报告类型" required>
         <select v-model="form.type">
           <option :value="1">基线检查报告</option>
           <option :value="2">渗透测试报告</option>
@@ -27,19 +27,21 @@
           </div>
         </div>
       </div>
+      <baseDate />
       <button type="button" @click="submit">保存</button>
+      <button type="button" @click="clearErr">clearErr</button>
     </baseForm>
-    <button @click="clearErr">clearErr</button>
   </div>
 </template>
 
 <script>
 import baseForm from './components/form-f'
 import baseFormItem from './components/formItem-f'
+import baseDate from './components/date'
 
 export default {
   name: 'app',
-  components: { baseForm, baseFormItem },
+  components: { baseForm, baseFormItem, baseDate },
   data() {
     const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
     return {
@@ -70,6 +72,7 @@ export default {
       console.log(this.$refs.testForm.validate())
     },
     clearErr() {
+      console.log(this.$refs.testForm)
       this.$refs.testForm.clearErr()
     },
   },

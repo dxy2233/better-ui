@@ -26,7 +26,7 @@ export default {
     },
     clearErr() {
       this.$children.forEach((item) => {
-        item.clearMessage()
+        if (item.$options.name === 'FormItem' && item.prop) item.clearMessage()
       })
     },
   },

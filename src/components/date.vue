@@ -11,17 +11,17 @@ export default {
   name: 'Date',
   props: {
     value: {
-      type: String
-    }
+      type: String,
+    },
   },
   model: {
-    event: 'update'
+    event: 'update',
   },
   data() {
     return {
       date: '',
       time: ['00', '00', '00'],
-      boxShow: false
+      boxShow: false,
     }
   },
   methods: {
@@ -47,13 +47,13 @@ export default {
       $event.stopPropagation()
       this.boxShow = false
     },
-    start($event) {
+    start() {
       this.boxShow = true
-    }
+    },
   },
-  render(h) {
+  render() {
     let _this = this
-    document.onmouseup = function(e) {
+    document.onmouseup = function (e) {
       var e2 = e || window.event
       var target = e2.target || e2.srcElement
       var _tar = document.body.querySelector('.date-control')
@@ -75,7 +75,7 @@ export default {
           <hr />
           <div class="time">
             <ul>
-              {createNum(0, 23).map(item => {
+              {createNum(0, 23).map((item) => {
                 return (
                   <li
                     onclick={() => {
@@ -89,7 +89,7 @@ export default {
               })}
             </ul>
             <ul>
-              {createNum(0, 59).map(item => {
+              {createNum(0, 59).map((item) => {
                 return (
                   <li
                     onclick={() => {
@@ -103,7 +103,7 @@ export default {
               })}
             </ul>
             <ul>
-              {createNum(0, 59).map(item => {
+              {createNum(0, 59).map((item) => {
                 return (
                   <li
                     onclick={() => {
@@ -124,7 +124,7 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>
 
