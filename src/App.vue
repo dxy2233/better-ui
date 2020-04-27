@@ -80,7 +80,7 @@ export default {
         ],
         radioTest: [{ required: true, message: 'radio', trigger: 'change' }],
         dutyDepartment: [
-          { required: true, message: '请输入责任部门', trigger: 'change' },
+          { required: true, message: '请输入责任部门', trigger: 'blur' },
         ],
       },
     }

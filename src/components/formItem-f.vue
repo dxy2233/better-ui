@@ -59,7 +59,7 @@ export default {
                 this.prop
               )[0]
             },
-            key === 'blur' ? true : false
+            key === 'blur' && this.$children.length === 0 ? true : false
           )
         }
       }
