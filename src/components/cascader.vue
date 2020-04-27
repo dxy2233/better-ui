@@ -74,6 +74,9 @@ export default {
       this.$refs.betterCascader.dispatchEvent(
         new Event('change', { bubbles: true })
       )
+      this.$refs.betterCascader.dispatchEvent(
+        new Event('blur', { bubbles: true })
+      )
       this.boxShow = false
     },
   },
