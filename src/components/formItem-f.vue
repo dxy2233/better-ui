@@ -66,7 +66,6 @@ export default {
     }
   },
   render() {
-    console.log(!this.$attrs.required)
     return (
       <div class="form-gound">
         <div class="form-item">
