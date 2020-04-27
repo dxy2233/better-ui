@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <baseForm ref="testForm" :form="form" :rules="rules">
-      <baseFormItem label="报告类型" prop="type" required>
+      <baseFormItem label="报告类型" prop="type">
         <select v-model="form.type">
           <option :value="1">基线检查报告</option>
           <option :value="2">渗透测试报告</option>
           <option :value="3">漏洞扫描报告</option>
         </select>
       </baseFormItem>
-      <baseFormItem label="blur测试" prop="blurTest" required>
+      <baseFormItem label="blur测试" prop="blurTest" :required="false">
         <input type="text" v-model="form.blurTest" />
       </baseFormItem>
       <div>

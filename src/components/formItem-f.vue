@@ -66,11 +66,15 @@ export default {
     }
   },
   render() {
+    console.log(!this.$attrs.required)
     return (
       <div class="form-gound">
         <div class="form-item">
           <label>
-            {this.$attrs.hasOwnProperty('required') ? <em>*</em> : null}
+            {this.$attrs.hasOwnProperty('required') &&
+            this.$attrs.required !== false ? (
+              <em>*</em>
+            ) : null}
             {this.label}
           </label>
           <span ref={this.prop}>{this.$slots.default}</span>
