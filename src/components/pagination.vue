@@ -28,14 +28,14 @@ export default {
   name: 'Pagination',
   props: {
     currentPage: {
-      type: Number // 当前页
+      type: Number, // 当前页
     },
     total: {
-      type: Number // 总条数
+      type: Number, // 总条数
     },
     pages: {
-      type: Number // 总页数
-    }
+      type: Number, // 总页数
+    },
   },
   computed: {
     totalPages() {
@@ -48,7 +48,7 @@ export default {
       else if (c >= t - 3)
         return [1, '...', t - 5, t - 4, t - 3, t - 2, t - 1, t]
       else return [1, '...', c - 2, c - 1, c, c + 1, c + 2, '...', t]
-    }
+    },
   },
   methods: {
     clickPage(page, direction) {
@@ -61,8 +61,8 @@ export default {
         this.$emit('update:currentPage', page)
         this.$emit('changeCurrentPage')
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

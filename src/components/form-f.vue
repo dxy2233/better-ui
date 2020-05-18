@@ -11,7 +11,6 @@ export default {
   },
   provide() {
     return {
-      form: this.form,
       rules: this.rules,
     }
   },

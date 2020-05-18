@@ -85,7 +85,15 @@ export default {
       },
     }
   },
-  created() {},
+  mounted() {
+    let res = {
+      type: 1,
+      blurTest: '',
+      radioTest: 1,
+      dutyDepartment: 'qwewqe',
+    }
+    this.form = JSON.parse(JSON.stringify(res))
+  },
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())

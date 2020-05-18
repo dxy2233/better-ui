@@ -11,7 +11,7 @@ export default {
       type: String,
     },
   },
-  inject: ['form', 'rules'],
+  inject: ['rules'],
   data() {
     return {
       blurMessage: null,
@@ -27,7 +27,7 @@ export default {
   methods: {
     mergeVerify() {
       this.clearMessage()
-      const res = verify(this.rules[this.prop], this.form, this.prop)
+      const res = verify(this.rules[this.prop], this.$parent.form, this.prop)
       if (res[0]) {
         // 返回false并给错误信息赋值
         this[res[1] + 'Message'] = res[0]
@@ -55,7 +55,7 @@ export default {
             () => {
               this[key + 'Message'] = verify(
                 rules[key],
-                this.form,
+                this.$parent.form,
                 this.prop
               )[0]
             },

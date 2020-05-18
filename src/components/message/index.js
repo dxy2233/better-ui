@@ -1,10 +1,10 @@
 import MessageComponents from './message.vue'
 
-export default function(Vue) {
+export default function (Vue) {
   let count = 0,
     messageCon,
     instance
-  Vue.prototype.$message = options => {
+  Vue.prototype.$message = (options) => {
     count++
     if (count === 1) {
       messageCon = Vue.extend(MessageComponents)

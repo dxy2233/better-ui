@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       lists: [],
-      count: 0
+      count: 0,
     }
   },
   methods: {},
@@ -26,7 +26,7 @@ export default {
         })}
       </transition-group>
     )
-  }
+  },
 }
 </script>
 

@@ -2,10 +2,10 @@ export default {
   name: 'Col',
   props: {
     prop: {
-      type: String
+      type: String,
     },
     label: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 }

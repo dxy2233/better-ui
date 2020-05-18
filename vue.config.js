@@ -4,6 +4,6 @@ module.exports = {
   publicPath: './',
   productionSourceMap: false,
   css: {
-    sourceMap: false
-  }
+    sourceMap: false,
+  },
 }

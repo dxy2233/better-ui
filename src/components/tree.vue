@@ -3,22 +3,22 @@ export default {
   name: 'Tree',
   props: {
     treeData: {
-      type: Array
+      type: Array,
     },
     label: {
-      type: String
+      type: String,
     },
     children: {
-      type: String
+      type: String,
     },
     removeField: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
       ifShow: {},
-      activeRow: {}
+      activeRow: {},
     }
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
     },
     remove(info) {
       this.$emit('remove', info)
-    }
+    },
   },
   render() {
     const loop = (array, label, children, key) => {
@@ -41,8 +41,9 @@ export default {
           <ul>
             <li
               class={{ active: item.id === this.activeRow.id }}
-              style={`padding-left:${(key + index).toString().split('-')
-                .length * 20}px;`}
+              style={`padding-left:${
+                (key + index).toString().split('-').length * 20
+              }px;`}
               onClick={() => this.nodeClick(item, key + index)}
             >
               <span class="forward">
@@ -56,7 +57,7 @@ export default {
               {item[this.removeField] ? (
                 <span
                   class="afterward"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation()
                     this.remove(item)
                   }}
@@ -75,8 +76,9 @@ export default {
           <ul>
             <li
               class={{ active: item.id === this.activeRow.id }}
-              style={`padding-left:${(key + index).toString().split('-')
-                .length * 20}px;`}
+              style={`padding-left:${
+                (key + index).toString().split('-').length * 20
+              }px;`}
               onClick={() => this.nodeClick(item, null)}
             >
               {item[label]}
@@ -97,7 +99,7 @@ export default {
         {loop(this.treeData, this.label, this.children, 0)}
       </div>
     )
-  }
+  },
 }
 </script>
 

@@ -3,12 +3,12 @@ export default {
   name: 'Loading',
   props: {
     tableData: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   render() {
     return {}
-  }
+  },
 }
 </script>
 

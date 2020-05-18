@@ -24,7 +24,7 @@ export default {
     return {
       visible: false,
       content: '',
-      promiseStatus: ''
+      promiseStatus: '',
     }
   },
   watch: {
@@ -33,7 +33,7 @@ export default {
       else {
         cutMask()
       }
-    }
+    },
   },
   methods: {
     confirm() {
@@ -49,8 +49,8 @@ export default {
     close() {
       this.promiseStatus.reject()
       this.visible = false
-    }
-  }
+    },
+  },
 }
 </script>
 

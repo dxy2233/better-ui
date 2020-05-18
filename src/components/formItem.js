@@ -2,10 +2,10 @@ export default {
   name: 'FormItem',
   props: {
     label: {
-      type: String
+      type: String,
     },
     prop: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 }

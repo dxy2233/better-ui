@@ -3,20 +3,20 @@ export default {
   name: 'Form',
   props: {
     form: {
-      type: Object
+      type: Object,
     },
     rules: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
-      validateErrMessage: {}
+      validateErrMessage: {},
     }
   },
   created() {
     // 添加错误提示的字段
-    this.$slots.default.forEach(item => {
+    this.$slots.default.forEach((item) => {
       if (item.componentOptions && item.componentOptions.propsData.prop) {
         this.$set(
           this.validateErrMessage,
@@ -31,9 +31,10 @@ export default {
       let pass = true
       let validateData = this.$slots.default
         .map(
-          item => item.componentOptions && item.componentOptions.propsData.prop
+          (item) =>
+            item.componentOptions && item.componentOptions.propsData.prop
         )
-        .filter(item => item)
+        .filter((item) => item)
       // 筛选出当前需要验证的字段
       for (let index = 0; index < validateData.length; index++) {
         let key = validateData[index]
@@ -76,7 +77,9 @@ export default {
     test(e, index, type, info) {
       const nowValue = e ? e.target.value : info
       this.validateErrMessage[index] = ''
-      let executeRule = this.rules[index].filter(item => item.trigger === type)
+      let executeRule = this.rules[index].filter(
+        (item) => item.trigger === type
+      )
       for (let i = 0; i < executeRule.length; i++) {
         if (executeRule[i].hasOwnProperty('required')) {
           /* 必填 */
@@ -98,14 +101,14 @@ export default {
           }
         }
       }
-    }
+    },
   },
   render() {
     return (
       <form>
-        {this.$slots.default.map(item => {
+        {this.$slots.default.map((item) => {
           if (item.componentOptions && item.componentOptions.propsData.prop) {
-            const loop = array => {
+            const loop = (array) => {
               for (let i = 0; i < array.length; i++) {
                 // vue组件绑定事件,改变update
                 if (array[i].tag && array[i].tag.includes('vue')) {
@@ -118,7 +121,7 @@ export default {
                     Array.isArray(temUpdate)
                       ? Object.assign(
                           {},
-                          temUpdate.forEach(item => item(info)),
+                          temUpdate.forEach((item) => item(info)),
                           this.test(null, address, type, info)
                         )
                       : Object.assign(
@@ -141,7 +144,7 @@ export default {
                   ) => {
                     this.test(e, address, type)
                   }
-                  let temChange = array[i].data.on['change'] || function() {}
+                  let temChange = array[i].data.on['change'] || function () {}
                   array[i].data.on['change'] = (
                     e,
                     address = item.componentOptions.propsData.prop,
@@ -150,7 +153,7 @@ export default {
                     Array.isArray(temChange)
                       ? Object.assign(
                           {},
-                          temChange.forEach(item => item(e)),
+                          temChange.forEach((item) => item(e)),
                           this.test(e, address, type)
                         )
                       : Object.assign(
@@ -190,7 +193,7 @@ export default {
         })}
       </form>
     )
-  }
+  },
 }
 </script>
 

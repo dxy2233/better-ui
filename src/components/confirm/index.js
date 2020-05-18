@@ -1,6 +1,6 @@
 import ConfirmComponents from './confirm.vue'
 
-export default function(Vue) {
+export default function (Vue) {
   let confirmCon = Vue.extend(ConfirmComponents)
   let instance = new confirmCon().$mount()
   Vue.prototype.$confirm = (content, title) => {
