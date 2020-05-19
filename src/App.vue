@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <baseForm ref="testForm" :form="form" :rules="rules">
+      <!-- <baseDialog :visible.sync="dialog"> -->
       <baseFormItem label="报告类型" prop="type">
         <select v-model="form.type">
           <option :value="1">基线检查报告</option>
@@ -8,6 +9,7 @@
           <option :value="3">漏洞扫描报告</option>
         </select>
       </baseFormItem>
+      <!-- </baseDialog> -->
       <baseFormItem label="blur测试" prop="blurTest" :required="false">
         <input type="text" v-model="form.blurTest" />
       </baseFormItem>
@@ -16,11 +18,11 @@
           <div>
             <baseFormItem label="radio测试" prop="radioTest" required>
               <label>
-                <input type="radio" v-model="form.radioTest" value="1" />
+                <input type="radio" v-model="form.radioTest" :value="false" />
                 1
               </label>
               <label>
-                <input type="radio" v-model="form.radioTest" value="2" />
+                <input type="radio" v-model="form.radioTest" :value="true" />
                 2
               </label>
             </baseFormItem>
@@ -46,6 +48,7 @@ import baseForm from './components/form-f'
 import baseFormItem from './components/formItem-f'
 import baseDate from './components/date'
 import baseCascader from './components/cascader'
+// import baseDialog from './components/dialog'
 
 export default {
   name: 'app',
@@ -53,6 +56,7 @@ export default {
   data() {
     const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
     return {
+      dialog: true,
       dutyDepartmentData: [
         {
           id: 123,
@@ -86,13 +90,13 @@ export default {
     }
   },
   mounted() {
-    let res = {
-      type: 1,
-      blurTest: '',
-      radioTest: 1,
-      dutyDepartment: 'qwewqe',
-    }
-    this.form = JSON.parse(JSON.stringify(res))
+    // let res = {
+    //   type: 1,
+    //   blurTest: '',
+    //   radioTest: null,
+    //   dutyDepartment: 'qwewqe',
+    // }
+    // this.form = JSON.parse(JSON.stringify(res))
   },
   methods: {
     submit() {

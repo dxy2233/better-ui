@@ -1,5 +1,5 @@
 <script>
-import { verify } from '@/utils/tool.js'
+import { verify, searchParent } from '@/utils/tool.js'
 
 export default {
   name: 'FormItem',
@@ -14,6 +14,7 @@ export default {
   inject: ['rules'],
   data() {
     return {
+      form: {},
       blurMessage: null,
       changeMessage: null,
     }
@@ -40,6 +41,9 @@ export default {
     },
   },
   mounted() {
+    // 获取父级form数据
+    this.form = searchParent(this.$parent)
+    // 委托blur和change事件
     if (this.prop) {
       const rules = {
         blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
@@ -47,7 +51,6 @@ export default {
           (item) => item.trigger === 'change'
         ),
       }
-      // 委托blur和change事件
       for (const key in rules) {
         if (rules[key].length > 0) {
           this.$refs[this.prop].addEventListener(

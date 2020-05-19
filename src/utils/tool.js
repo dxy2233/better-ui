@@ -7,10 +7,10 @@ export function isEmpty(v) {
         return true
       break
     case 'boolean':
-      if (!v) return true
+      if (v !== true && v !== false) return true
       break
     case 'number':
-      if (0 === v || isNaN(v)) return true
+      if (isNaN(v)) return true
       break
     case 'object':
       if (null === v || v.length === 0) return true
@@ -39,4 +39,13 @@ export function verify(array, form, key) {
   }
   // 验证通过后返回null直接赋值给错误文字的字段
   return [null, null]
+}
+
+export function searchParent(node) {
+  let res = {}
+  !(function loop(node) {
+    if (node.form) res = node.form
+    else loop(node.$parent)
+  })(node)
+  return res
 }
