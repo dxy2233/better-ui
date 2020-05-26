@@ -5335,7 +5335,7 @@ function verify(array, form, key) {
     else if (array[i].validator && !array[i].validator.test(form[key])) {
         return [array[i].message, array[i].trigger];
       } // 自定义方法
-      else if (array[i].other && array[i].other(form)) {
+      else if (array[i].other && !array[i].other(form)) {
           return [array[i].message, array[i].trigger];
         }
   } // 验证通过后返回null直接赋值给错误文字的字段

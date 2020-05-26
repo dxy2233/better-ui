@@ -33,7 +33,7 @@ export function verify(array, form, key) {
       return [array[i].message, array[i].trigger]
     }
     // 自定义方法
-    else if (array[i].other && array[i].other(form)) {
+    else if (array[i].other && !array[i].other(form)) {
       return [array[i].message, array[i].trigger]
     }
   }

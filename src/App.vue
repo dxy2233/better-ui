@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <baseForm ref="testForm" :form="form" :rules="rules">
-      <!-- <baseDialog :visible.sync="dialog"> -->
       <baseFormItem label="报告类型" prop="type">
         <select v-model="form.type">
           <option :value="1">基线检查报告</option>
@@ -9,7 +8,6 @@
           <option :value="3">漏洞扫描报告</option>
         </select>
       </baseFormItem>
-      <!-- </baseDialog> -->
       <baseFormItem label="blur测试" prop="blurTest" :required="false">
         <input type="text" v-model="form.blurTest" />
       </baseFormItem>
@@ -55,6 +53,10 @@ export default {
   components: { baseForm, baseFormItem, baseDate, baseCascader },
   data() {
     const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
+    const fileNameRule = function (form) {
+      if (form.dutyDepartment === '') return false
+      else return true
+    }
     return {
       dialog: true,
       dutyDepartmentData: [
@@ -84,20 +86,12 @@ export default {
         ],
         radioTest: [{ required: true, message: 'radio', trigger: 'change' }],
         dutyDepartment: [
-          { required: true, message: '请输入责任部门', trigger: 'blur' },
+          { other: fileNameRule, message: '请输入责任部门', trigger: 'blur' },
         ],
       },
     }
   },
-  mounted() {
-    // let res = {
-    //   type: 1,
-    //   blurTest: '',
-    //   radioTest: null,
-    //   dutyDepartment: 'qwewqe',
-    // }
-    // this.form = JSON.parse(JSON.stringify(res))
-  },
+  mounted() {},
   methods: {
     submit() {
       console.log(this.$refs.testForm.validate())
