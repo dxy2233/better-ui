@@ -10,6 +10,11 @@ export default {
       default: function () {},
     },
   },
+  methods: {
+    rowClick(item, index) {
+      this.$emit('rowClick', item, index)
+    },
+  },
   render() {
     if (!this.tableData || !this.$slots.default) return
     let resData = this.$slots.default.filter((item) => item.tag)
@@ -31,7 +36,10 @@ export default {
         <tbody>
           {this.tableData.map((item, index) => {
             return (
-              <tr class={this.rowClass(item, index)}>
+              <tr
+                onClick={() => this.rowClick(item, index)}
+                class={this.rowClass(item, index)}
+              >
                 {resData.map((item2) => {
                   return item2.data.scopedSlots ? (
                     <td>{item2.data.scopedSlots.button({ row: item })}</td>

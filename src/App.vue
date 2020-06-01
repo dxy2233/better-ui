@@ -38,6 +38,11 @@
       <button type="button" @click="submit">保存</button>
       <button type="button" @click="clearErr">clearErr</button>
     </baseForm>
+
+    <baseTable :tableData="tableData" @rowClick="rowClick">
+      <baseCol prop="name" label="信息系统" />
+      <baseCol prop="time" label="整改时间" />
+    </baseTable>
   </div>
 </template>
 
@@ -47,10 +52,19 @@ import baseFormItem from './components/formItem-f'
 import baseDate from './components/date'
 import baseCascader from './components/cascader'
 // import baseDialog from './components/dialog'
+import baseTable from './components/table'
+import baseCol from './components/col'
 
 export default {
   name: 'app',
-  components: { baseForm, baseFormItem, baseDate, baseCascader },
+  components: {
+    baseForm,
+    baseFormItem,
+    baseDate,
+    baseCascader,
+    baseTable,
+    baseCol,
+  },
   data() {
     const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
     const fileNameRule = function (form) {
@@ -89,6 +103,10 @@ export default {
           { other: fileNameRule, message: '请输入责任部门', trigger: 'blur' },
         ],
       },
+      tableData: [
+        { name: 'name1', time: 'time1' },
+        { name: 'name2', time: 'time2' },
+      ],
     }
   },
   mounted() {},
@@ -98,6 +116,10 @@ export default {
     },
     clearErr() {
       this.$refs.testForm.clearErr()
+    },
+    rowClick(item, index) {
+      console.log(item)
+      console.log(index)
     },
   },
 }
