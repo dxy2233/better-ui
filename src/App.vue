@@ -1,43 +1,30 @@
 <template>
   <div id="app">
-    <baseForm ref="testForm" :form="form" :rules="rules">
-      <baseFormItem label="报告类型" prop="type">
-        <select v-model="form.type">
-          <option :value="1">基线检查报告</option>
-          <option :value="2">渗透测试报告</option>
-          <option :value="3">漏洞扫描报告</option>
-        </select>
-      </baseFormItem>
-      <baseFormItem label="blur测试" prop="blurTest" :required="false">
-        <input type="text" v-model="form.blurTest" />
-      </baseFormItem>
-      <div>
-        <div>
-          <div>
-            <baseFormItem label="radio测试" prop="radioTest" required>
-              <label>
-                <input type="radio" v-model="form.radioTest" :value="false" />
-                1
-              </label>
-              <label>
-                <input type="radio" v-model="form.radioTest" :value="true" />
-                2
-              </label>
-            </baseFormItem>
-          </div>
+    <button @click="openDialog('新增单位')">opendialog</button>
+    <baseDialog :visible.sync="dialog">
+      <template #title>{{ dialogTitle }}</template>
+      <baseForm ref="systemForm" :form="form" :rules="rules">
+        <div v-if="dialogTitle === '新增单位'" key="key1">
+          <baseFormItem label="单位名称" prop="orgName" required>
+            <input type="text" v-model="form.orgName" key="orgName1" />
+          </baseFormItem>
+          <baseFormItem label="上级节点">
+            <baseCascader v-model="form.parentId" :data="dutyDepartmentData" />
+          </baseFormItem>
         </div>
-      </div>
-      <baseDate />
-      <baseFormItem label="责任部门" prop="dutyDepartment" required>
-        <baseCascader
-          v-model="form.dutyDepartment"
-          :data="dutyDepartmentData"
-          placeholder="请输入责任部门"
-        />
-      </baseFormItem>
-      <button type="button" @click="submit">保存</button>
-      <button type="button" @click="clearErr">clearErr</button>
-    </baseForm>
+        <div v-else key="key2">
+          <baseFormItem label="单位名称" required>
+            <input type="text" v-model="form.orgName" disabled />
+          </baseFormItem>
+          <baseFormItem label="系统名称" prop="name" required>
+            <input type="text" v-model="form.name" />
+          </baseFormItem>
+        </div>
+        <button type="button" @click="submit">
+          保存
+        </button>
+      </baseForm>
+    </baseDialog>
 
     <baseTable :tableData="tableData" @rowClick="rowClick">
       <baseCol prop="name" label="信息系统" />
@@ -49,9 +36,9 @@
 <script>
 import baseForm from './components/form-f'
 import baseFormItem from './components/formItem-f'
-import baseDate from './components/date'
+// import baseDate from './components/date'
 import baseCascader from './components/cascader'
-// import baseDialog from './components/dialog'
+import baseDialog from './components/dialog'
 import baseTable from './components/table'
 import baseCol from './components/col'
 
@@ -60,19 +47,18 @@ export default {
   components: {
     baseForm,
     baseFormItem,
-    baseDate,
     baseCascader,
     baseTable,
     baseCol,
+    baseDialog,
   },
   data() {
-    const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
-    const fileNameRule = function (form) {
-      if (form.dutyDepartment === '') return false
-      else return true
-    }
+    // const projectCode = /^([0-9A-Za-z-_.]{6,32})$/
+    // const fileNameRule = function (form) {
+    //   if (form.dutyDepartment === '') return false
+    //   else return true
+    // }
     return {
-      dialog: true,
       dutyDepartmentData: [
         {
           id: 123,
@@ -80,28 +66,23 @@ export default {
           parentId: 1232311,
         },
       ],
+      dialog: false,
+      dialogTitle: '',
       form: {
-        type: null,
-        blurTest: '',
-        radioTest: '',
-        dutyDepartment: '',
+        orgName: '',
+        parentId: '',
+        // 系统
+        name: '',
+        orgId: '',
       },
       rules: {
-        type: [
-          { required: true, message: '请输入项目编号', trigger: 'change' },
+        orgName: [
+          { required: true, message: '请输入单位名称', trigger: 'blur' },
         ],
-        blurTest: [
-          { required: true, message: '请输入文本', trigger: 'blur' },
-          {
-            validator: projectCode,
-            message: '请输入由字母、数字、- 、 _ 或 . 组成的6-32位项目编号',
-            trigger: 'blur',
-          },
+        parentId: [
+          { required: true, message: '请选择上级单位', trigger: 'blur' },
         ],
-        radioTest: [{ required: true, message: 'radio', trigger: 'change' }],
-        dutyDepartment: [
-          { other: fileNameRule, message: '请输入责任部门', trigger: 'blur' },
-        ],
+        name: [{ required: true, message: '请输入系统名称', trigger: 'blur' }],
       },
       tableData: [
         { name: 'name1', time: 'time1' },
@@ -111,8 +92,12 @@ export default {
   },
   mounted() {},
   methods: {
+    openDialog(type) {
+      this.dialogTitle = type
+      this.dialog = true
+    },
     submit() {
-      console.log(this.$refs.testForm.validate())
+      console.log(this.$refs.systemForm.validate())
     },
     clearErr() {
       this.$refs.testForm.clearErr()

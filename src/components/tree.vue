@@ -53,7 +53,7 @@ export default {
                   <svg-icon icon-class="u-add" />
                 )}
               </span>
-              {item[label]}
+              <span class="txt">{item[label]}</span>
               {item[this.removeField] ? (
                 <span
                   class="afterward"
@@ -81,7 +81,7 @@ export default {
               }px;`}
               onClick={() => this.nodeClick(item, null)}
             >
-              {item[label]}
+              <span class="txt">{item[label]}</span>
               {item[this.removeField] ? (
                 <span class="afterward" onClick={() => this.remove(item)}>
                   删除
