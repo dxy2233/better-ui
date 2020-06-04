@@ -14,7 +14,7 @@ export default {
   inject: ['rules'],
   data() {
     return {
-      form: {},
+      // form: {},
       blurMessage: null,
       changeMessage: null,
     }
@@ -23,6 +23,9 @@ export default {
     errMessage() {
       if (!this.blurMessage && !this.changeMessage) return null
       else return this.blurMessage || this.changeMessage
+    },
+    form() {
+      return searchParent(this.$parent)
     },
   },
   methods: {
@@ -42,7 +45,7 @@ export default {
   },
   mounted() {
     // 获取父级form数据
-    this.form = searchParent(this.$parent)
+    // this.form = searchParent(this.$parent)
     // 委托blur和change事件
     if (this.prop) {
       const rules = {

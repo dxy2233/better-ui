@@ -1,10 +1,18 @@
 <template>
   <div id="app">
-    <button @click="openDialog('新增单位')">opendialog</button>
+    <button @click="openDialog('新增单位', { orgName: 'sdfdsf' })">
+      opendialog
+    </button>
     <baseDialog :visible.sync="dialog">
       <template #title>{{ dialogTitle }}</template>
       <baseForm ref="systemForm" :form="form" :rules="rules">
-        <div v-if="dialogTitle === '新增单位'" key="key1">
+        <baseFormItem label="单位名称" prop="orgName" required>
+          <input type="text" v-model="form.orgName" key="orgName1" />
+        </baseFormItem>
+        <baseFormItem label="上级节点">
+          <baseCascader v-model="form.parentId" :data="dutyDepartmentData" />
+        </baseFormItem>
+        <!-- <div v-if="dialogTitle === '新增单位'" key="key1">
           <baseFormItem label="单位名称" prop="orgName" required>
             <input type="text" v-model="form.orgName" key="orgName1" />
           </baseFormItem>
@@ -19,7 +27,7 @@
           <baseFormItem label="系统名称" prop="name" required>
             <input type="text" v-model="form.name" />
           </baseFormItem>
-        </div>
+        </div> -->
         <button type="button" @click="submit">
           保存
         </button>
@@ -144,8 +152,9 @@ export default {
   },
   mounted() {},
   methods: {
-    openDialog(type) {
+    openDialog(type, info) {
       this.dialogTitle = type
+      this.form = JSON.parse(JSON.stringify(info))
       this.dialog = true
     },
     submit() {
