@@ -22,8 +22,10 @@ export default {
     }
   },
   methods: {
-    nodeClick(info, key) {
+    trip(key) {
       if (this.ifShow.hasOwnProperty(key)) this.ifShow[key] = !this.ifShow[key]
+    },
+    nodeClick(info) {
       this.activeRow = info
       this.$emit('nodeClick', info)
     },
@@ -44,9 +46,17 @@ export default {
               style={`padding-left:${
                 (key + index).toString().split('-').length * 20
               }px;`}
-              onClick={() => this.nodeClick(item, key + index)}
+              onClick={() => {
+                this.nodeClick(item, key + index)
+              }}
             >
-              <span class="forward">
+              <span
+                class="forward"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  this.trip(key + index)
+                }}
+              >
                 {this.ifShow[key + index] ? (
                   <svg-icon icon-class="u-reduce" />
                 ) : (
@@ -79,11 +89,17 @@ export default {
               style={`padding-left:${
                 (key + index).toString().split('-').length * 20
               }px;`}
-              onClick={() => this.nodeClick(item, null)}
+              onClick={() => this.nodeClick(item)}
             >
               <span class="txt">{item[label]}</span>
               {item[this.removeField] ? (
-                <span class="afterward" onClick={() => this.remove(item)}>
+                <span
+                  class="afterward"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    this.remove(item)
+                  }}
+                >
                   删除
                 </span>
               ) : (
