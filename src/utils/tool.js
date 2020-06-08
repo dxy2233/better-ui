@@ -24,12 +24,16 @@ export function isEmpty(v) {
 
 export function verify(array, form, key) {
   for (let i = 0; i < array.length; i++) {
-    //   required
-    if (array[i].required && isEmpty(form[key])) {
+    let res = form
+    key.split('.').forEach((item) => {
+      res = res[item]
+    })
+    // required
+    if (array[i].required && isEmpty(res)) {
       return [array[i].message, array[i].trigger]
     }
     // 正则
-    else if (array[i].validator && !array[i].validator.test(form[key])) {
+    else if (array[i].validator && !array[i].validator.test(res)) {
       return [array[i].message, array[i].trigger]
     }
     // 自定义方法

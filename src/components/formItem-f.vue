@@ -10,11 +10,13 @@ export default {
     prop: {
       type: String,
     },
+    rule: {
+      type: Array,
+    },
   },
   inject: ['rules'],
   data() {
     return {
-      // form: {},
       blurMessage: null,
       changeMessage: null,
     }
@@ -31,7 +33,9 @@ export default {
   methods: {
     mergeVerify() {
       this.clearMessage()
-      const res = verify(this.rules[this.prop], this.form, this.prop)
+      const res = !this.rule
+        ? verify(this.rules[this.prop], this.form, this.prop)
+        : verify(this.rule, this.form, this.prop)
       if (res[0]) {
         // 返回false并给错误信息赋值
         this[res[1] + 'Message'] = res[0]
@@ -44,23 +48,29 @@ export default {
     },
   },
   mounted() {
-    // 获取父级form数据
-    // this.form = searchParent(this.$parent)
     // 委托blur和change事件
     if (this.prop) {
-      const rules = {
-        blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
-        change: this.rules[this.prop].filter(
-          (item) => item.trigger === 'change'
-        ),
+      let objRules = {}
+      if (this.rule) {
+        objRules = {
+          blur: this.rule.filter((item) => item.trigger === 'blur'),
+          change: this.rule.filter((item) => item.trigger === 'change'),
+        }
+      } else {
+        objRules = {
+          blur: this.rules[this.prop].filter((item) => item.trigger === 'blur'),
+          change: this.rules[this.prop].filter(
+            (item) => item.trigger === 'change'
+          ),
+        }
       }
-      for (const key in rules) {
-        if (rules[key].length > 0) {
+      for (const key in objRules) {
+        if (objRules[key].length > 0) {
           this.$refs[this.prop].addEventListener(
             key,
             () => {
               this[key + 'Message'] = verify(
-                rules[key],
+                objRules[key],
                 this.form,
                 this.prop
               )[0]
@@ -70,6 +80,17 @@ export default {
         }
       }
     }
+    // else if (this.prop && this.rule) {
+    //   this.rule.forEach((item) => {
+    //     this.$refs[this.prop].addEventListener(
+    //       item.trigger,
+    //       () => {
+    //         this[item.trigger + 'Message'] = verify(rules[key], this.form, this.prop)[0]
+    //       },
+    //       item.trigger === 'blur' && this.$children.length === 0 ? true : false
+    //     )
+    //   })
+    // }
   },
   render() {
     return (

@@ -6,6 +6,26 @@
     <baseDialog :visible.sync="dialog">
       <template #title>{{ dialogTitle }}</template>
       <baseForm ref="systemForm" :form="form" :rules="rules">
+        <div v-for="(item, index) in form.netItemBOList" :key="index">
+          <baseFormItem
+            label="网络单元名称"
+            :prop="'netItemBOList.' + index + '.systemName'"
+            :rule="[{ required: true, message: 'test', trigger: 'blur' }]"
+            required
+          >
+            <input type="text" v-model="form.netItemBOList[index].systemName" />
+          </baseFormItem>
+          <baseFormItem label="安全保护等级标准" required>
+            <input type="text" v-model="form.netItemBOList[index].level" />
+          </baseFormItem>
+          <span @click="removeList('netItemBOList', index)">delete</span>
+        </div>
+        <button
+          type="button"
+          @click="addList('netItemBOList', { systemName: '', level: '' })"
+        >
+          新增
+        </button>
         <baseFormItem label="单位名称" prop="orgName" required>
           <input type="text" v-model="form.orgName" key="orgName1" />
         </baseFormItem>
@@ -89,6 +109,7 @@ export default {
       dialog: false,
       dialogTitle: '',
       form: {
+        netItemBOList: [{ systemName: '', level: '' }],
         orgName: '',
         parentId: '',
         // 系统
@@ -154,7 +175,7 @@ export default {
   methods: {
     openDialog(type, info) {
       this.dialogTitle = type
-      this.form = JSON.parse(JSON.stringify(info))
+      // this.form = JSON.parse(JSON.stringify(info))
       this.dialog = true
     },
     submit() {
@@ -174,6 +195,12 @@ export default {
     treeNodeRemove(val) {
       console.log('remove')
       console.log(val)
+    },
+    addList(key, obj) {
+      this.form[key].push(obj)
+    },
+    removeList(key, index) {
+      this.form[key].splice(index, 1)
     },
   },
 }
