@@ -8,6 +8,14 @@ export default {
     data: {
       type: Array,
     },
+    childrenName: {
+      type: String,
+      default: 'nextNodes',
+    },
+    label: {
+      type: String,
+      default: 'orgName',
+    },
   },
   model: {
     event: 'update',
@@ -24,13 +32,14 @@ export default {
       immediate: true,
       handler() {
         let res = {}
-        function loop(array, id) {
+        const loop = (array, id) => {
           for (let index = 0; index < array.length; index++) {
             if (array[index].id === id) {
               res = array[index]
               break
             } else {
-              if (array[index].nextNodes) loop(array[index].nextNodes, id)
+              if (array[index][this.childrenName])
+                loop(array[index][this.childrenName], id)
             }
           }
         }
@@ -41,13 +50,14 @@ export default {
     data: {
       handler() {
         let res = {}
-        function loop(array, id) {
+        const loop = (array, id) => {
           for (let index = 0; index < array.length; index++) {
             if (array[index].id === id) {
               res = array[index]
               break
             } else {
-              if (array[index].nextNodes) loop(array[index].nextNodes, id)
+              if (array[index][this.childrenName])
+                loop(array[index][this.childrenName], id)
             }
           }
         }
@@ -63,9 +73,9 @@ export default {
       this.boxShow = true
     },
     mouserEnter(info, index) {
-      !info.nextNodes
+      !info[this.childrenName]
         ? (this.cascaderData = this.cascaderData.slice(0, index + 1))
-        : this.$set(this.cascaderData, index + 1, info.nextNodes)
+        : this.$set(this.cascaderData, index + 1, info[this.childrenName])
     },
     selectData(info) {
       this.selectedData = info
@@ -100,7 +110,7 @@ export default {
           disabled={this.$attrs.disabled}
         >
           <option value="1" style="display:none;">
-            {this.selectedData.orgName}
+            {this.selectedData[this.label]}
           </option>
         </select>
         <div v-show={this.boxShow} class="box">
@@ -117,8 +127,8 @@ export default {
                         this.selectData(item2)
                       }}
                     >
-                      {item2.orgName}
-                      {item2.nextNodes ? <span> ></span> : ''}
+                      {item2[this.label]}
+                      {item2[this.childrenName] ? <span> ></span> : ''}
                     </li>
                   )
                 })}

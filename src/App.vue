@@ -175,7 +175,7 @@ export default {
   methods: {
     openDialog(type, info) {
       this.dialogTitle = type
-      // this.form = JSON.parse(JSON.stringify(info))
+      this.form = JSON.parse(JSON.stringify(info))
       this.dialog = true
     },
     submit() {
