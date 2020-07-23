@@ -68,6 +68,10 @@
       @nodeClick="getTreeNode"
       @remove="treeNodeRemove"
     />
+    <label>
+      xxxxxxxxxxxxxx
+      <baseCascader v-model="form.parentId" :data="dutyDepartmentData" />
+    </label>
   </div>
 </template>
 
@@ -101,9 +105,49 @@ export default {
     return {
       dutyDepartmentData: [
         {
-          id: 123,
-          orgName: 'sssss',
-          parentId: 1232311,
+          id: '51743896B76B4658BE0624CBAE4D4C88',
+          orgName: '重庆联通',
+          orgCode: 'cqlt_147',
+          orgType: '重庆联通',
+          parentId: null,
+          editVisble: false,
+          createVisble: false,
+          deleteVisble: false,
+          nextNodes: null,
+        },
+        {
+          id: '9692EF34328747E59798D95BC1079344',
+          orgName: '重庆移动',
+          orgCode: 'cqyd_147',
+          orgType: '重庆移动',
+          parentId: null,
+          editVisble: false,
+          createVisble: false,
+          deleteVisble: false,
+          nextNodes: [
+            {
+              id: '1793F83D23B9460BB5ADE1B37BB75F16',
+              orgName: '研发部',
+              orgCode: 'yan001',
+              orgType: '开发',
+              parentId: '9692EF34328747E59798D95BC1079344',
+              editVisble: false,
+              createVisble: false,
+              deleteVisble: false,
+              nextNodes: null,
+            },
+          ],
+        },
+        {
+          id: 'BFAC450585E641FABC7ADD69D8416FBC',
+          orgName: '重庆电信',
+          orgCode: 'cqdx_147',
+          orgType: '重庆电信',
+          parentId: null,
+          editVisble: false,
+          createVisble: false,
+          deleteVisble: false,
+          nextNodes: null,
         },
       ],
       dialog: false,

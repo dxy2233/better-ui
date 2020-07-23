@@ -103,16 +103,15 @@ export default {
     }
     return (
       <div class="cascader">
-        <select
-          ref="betterCascader"
-          value="1"
-          onclick={this.start}
-          disabled={this.$attrs.disabled}
-        >
-          <option value="1" style="display:none;">
-            {this.selectedData[this.label]}
-          </option>
-        </select>
+        <span class="skin" onclick={this.start}>
+          <input
+            ref="betterCascader"
+            type="text"
+            value={this.selectedData[this.label]}
+            readonly="readonly"
+            disabled={this.$attrs.disabled}
+          />
+        </span>
         <div v-show={this.boxShow} class="box">
           {this.cascaderData.map((item, index) => {
             return (
@@ -123,12 +122,13 @@ export default {
                       onmouseenter={() => {
                         this.mouserEnter(item2, index)
                       }}
-                      onclick={() => {
+                      onclick={(e) => {
+                        e.preventDefault()
                         this.selectData(item2)
                       }}
                     >
                       {item2[this.label]}
-                      {item2[this.childrenName] ? <span> ></span> : ''}
+                      {item2[this.childrenName] ? <span> &gt;</span> : ''}
                     </li>
                   )
                 })}
@@ -147,6 +147,23 @@ export default {
   position: relative;
   z-index: 1000;
   width: 100%;
+  .skin {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-left: 2px solid #000;
+      border-bottom: 2px solid #000;
+      transform: rotate(-45deg);
+      right: 6px;
+      top: 3px;
+    }
+    input {
+      cursor: unset;
+    }
+  }
   .box {
     position: absolute;
     box-sizing: border-box;
