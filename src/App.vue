@@ -70,7 +70,11 @@
     />
     <label>
       xxxxxxxxxxxxxx
-      <baseCascader v-model="form.parentId" :data="dutyDepartmentData" />
+      <baseCascader
+        v-model="form.parentId"
+        :data="dutyDepartmentData"
+        :disabled="false"
+      />
     </label>
   </div>
 </template>

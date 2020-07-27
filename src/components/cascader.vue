@@ -103,11 +103,12 @@ export default {
     }
     return (
       <div class="cascader">
-        <span class="skin" onclick={this.start}>
+        <span class="skin">
           <input
             ref="betterCascader"
             type="text"
             value={this.selectedData[this.label]}
+            onclick={this.start}
             readonly="readonly"
             disabled={this.$attrs.disabled}
           />
