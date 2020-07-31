@@ -19,13 +19,7 @@ export default {
     if (!this.tableData || !this.$slots.default) return
     let resData = this.$slots.default.filter((item) => item.tag)
     return (
-      <table
-        border="1"
-        width="100%"
-        align="center"
-        cellspacing="0"
-        cellpadding="0"
-      >
+      <table width="100%" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
             {resData.map((item) => (
@@ -57,26 +51,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-table {
-  border: #d0e8fa;
-  background: #fff;
-  text-align: center;
-  border-collapse: collapse;
-  thead > tr {
-    background: #e7f3fd;
-  }
-  th,
-  td {
-    padding: 5px 0;
-  }
-  tbody > tr:hover {
-    background: #d0f5ea;
-  }
-  td {
-    :not(:first-child) {
-      margin-left: 10px;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

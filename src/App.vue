@@ -266,5 +266,9 @@ body {
   form {
     background: #fff;
   }
+  table {
+    width: 600px;
+    margin: 0 auto;
+  }
 }
 </style>
